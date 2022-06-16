@@ -2,11 +2,10 @@ import { useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import {toast} from 'react-toastify'
 import {getAuth, createUserWithEmailAndPassword, updateProfile} from 'firebase/auth'
-import {setdoc, doc, serverTimestamp} from'firebase/firestore'
+import {setDoc, doc, serverTimestamp} from'firebase/firestore'
 import {db} from '../firebase.config'
 import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg'
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
-import { setDoc } from 'firebase/firestore'
 
 function SignUp() {
     const [showPassword, setShowPassword] = useState(false)

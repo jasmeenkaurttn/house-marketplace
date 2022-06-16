@@ -35,7 +35,7 @@ function SignIn() {
                 navigate('/')
             }   
         } catch (error) {
-            toast.error('Bad User Credentials')
+            toast.error('Bad User Credentials') 
         }
     }
     return (
@@ -43,7 +43,7 @@ function SignIn() {
             <div className="pageContainer">
                 <header>
                     <p className="pageHeader">
-                        WelcomeBack!
+                        Welcome Back!
                     </p>
                 </header>
 
