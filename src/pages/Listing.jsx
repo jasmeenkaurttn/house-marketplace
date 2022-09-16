@@ -1,11 +1,21 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/swiper-bundle.css'
+// import 'swiper/css';
+// import 'swiper/css/bundle';
+// import 'swiper/css/navigation';
+// import 'swiper/css/pagination';
+// import 'swiper/css/scrollbar';
+// import 'swiper/css/a11y';
 import { getDoc, doc } from 'firebase/firestore'
 import { getAuth } from 'firebase/auth'
 import { db } from '../firebase.config'
 import Spinner from '../components/Spinner'
 import shareIcon from '../assets/svg/shareIcon.svg'
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y])
 
 function Listing() {
   const [listing, setListing] = useState(null)
@@ -36,7 +46,28 @@ function Listing() {
   }
   return (
     <main>
-      {/* Slider */}
+      <Swiper
+        slidesPerView={1}
+        pagination={{ clickable: true }}
+        navigation={true}
+        a11y={true}>
+
+        {listing.imageUrls.map((url, index) => (
+          <SwiperSlide key={index}>
+            <div
+              style={{
+                minHeight: '20rem',
+                background: `url(${listing.imageUrls[index]}) 
+                  center no-repeat`,
+                backgroundSize: 'cover'
+              }}
+              className="swiperSlideDiv">
+
+            </div>
+            {/* <img style={{width: '100%', height: 'auto'}} src={image} alt='{listing.title'/> */}
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
       {/* copy link to their clipboard so that user can share it with friends */}
       <div className="shareIconDiv" onClick={() => {
@@ -97,13 +128,13 @@ function Listing() {
             center={[listing.geolocation.lat, listing.geolocation.lng]}
             zoom={13}
             scrollWheelZoom={false}>
-            
+
             <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url='https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png'
             />
 
-            <Marker 
+            <Marker
               position={[listing.geolocation.lat, listing.geolocation.lng]}
             >
               <Popup>{listing.location}</Popup>
