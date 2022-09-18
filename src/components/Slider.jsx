@@ -38,6 +38,10 @@ function Slider() {
   if(loading) {
     return <Spinner />
   }
+
+  if(listings.length === 0){
+    return <></> // just return a fragment for removing big space of home slider
+  }
   return listings && ( // if there are listings, then execute this
    <>
     <p className="exploreHeading">Recommended</p>
